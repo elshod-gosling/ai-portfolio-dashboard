@@ -1,43 +1,35 @@
-# AI Triad Active Task Board
+# AI Triad Active Task Board: Portfolio & Analytics Website
 
 Use this board to track task assignments, worktree status, and handoffs between **Antigravity**, **Codex**, and **Claude**.
 
 ---
 
-## Active Sprints / Tasks
+## Active Sprint & Assignments
 
-| Task ID | Feature / Component | Assigned Agent | Worktree Branch | Status | Next Hand-off |
+| Task ID | Feature / Component | Assigned Agent | Worktree Branch | Status | Target Outcome |
 | :---: | :--- | :---: | :---: | :---: | :---: |
-| **TASK-001** | Multi-Agent Worktree Architecture & Repository Setup | Antigravity | `main` | `In Progress` | User Review |
-| **TASK-002** | Initial Core Schema & Project Scaffolding | Codex | `agent/codex` | `Queued` | Claude Review |
-| **TASK-003** | Domain Logic & Security Guard Verification | Claude | `agent/claude` | `Queued` | Antigravity QA |
-| **TASK-004** | End-to-End Visual Integration & Smoke Test | Antigravity | `agent/antigravity` | `Queued` | Release to Main |
+| **TASK-001** | Git Worktrees & Triad Architecture Setup | Antigravity | `main` | `Completed` | Worktrees provisioned & tested |
+| **TASK-002** | Initial Website Base (React + Tailwind + Recharts) | Antigravity | `main` | `Completed` | Production build verified |
+| **TASK-003** | Comprehensive Unit & Regression Test Suite | Codex | `agent/codex` | `Assigned` | Vitest / Component test suite |
+| **TASK-004** | State Management, Filtering & Keyboard Accessibility | Claude | `agent/claude` | `Assigned` | WCAG 2.1 AA & interactive state |
+| **TASK-005** | Real-Time Telemetry & Visual Browser Verification | Antigravity | `agent/antigravity` | `Queued` | Responsive QA & release to main |
 
 ---
 
-## Status Legend
-- `Queued`: Task is specified and waiting for prerequisites.
-- `In Progress`: Agent is actively working inside its assigned worktree.
-- `Ready for Review`: Agent finished implementation; waiting for peer review.
-- `In Review`: Peer agent (typically Claude for code, Antigravity for UI) is reviewing.
-- `Blocked`: Requires user input or dependency completion.
-- `Completed`: Merged into canonical `main` branch.
+## Instructions for Current Agent Sprints
 
----
+### For Codex (`agent/codex` / `.worktrees/codex`):
+1. Navigate to `.worktrees/codex`.
+2. Install test dependencies if needed (`npm install -D vitest @testing-library/react jsdom`).
+3. Create unit test suites in `src/__tests__/`:
+   - `ProjectsGrid.test.tsx` (Verifying filter logic)
+   - `AnalyticsDashboard.test.tsx` (Chart rendering)
+   - `ContactModal.test.tsx` (Form input updates)
+4. Commit: `feat(test): add component test coverage [Codex]`.
 
-## New Task Template
-
-When creating a new task, copy and fill this template:
-
-```markdown
-### [TASK-XXX] <Feature Name>
-- **Goal:** <One-sentence summary of the objective>
-- **Lead Architect (Antigravity):** Define contracts, types, and acceptance criteria.
-- **Implementer (Codex):** Scaffold endpoints, ORM models, and write test suites.
-- **Reviewer / Refactorer (Claude):** Audit logic, verify edge cases, and run test-fix loop.
-- **QA & Merging (Antigravity):** Run visual/browser checks and merge to main.
-- **Files Touched:**
-  - `path/to/spec.ts`
-  - `path/to/implementation.ts`
-  - `path/to/test.spec.ts`
-```
+### For Claude (`agent/claude` / `.worktrees/claude`):
+1. Navigate to `.worktrees/claude`.
+2. Inspect `src/components/ContactModal.tsx` and `src/components/ProjectsGrid.tsx`.
+3. Add form validation (email regex, length checks, error messages) and ARIA accessibility attributes (`aria-label`, `role="dialog"`).
+4. Run `npm run build` and `npm test` until all checks are completely green.
+5. Commit: `refactor(a11y): enhance validation and accessibility [Claude]`.
