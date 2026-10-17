@@ -24,7 +24,7 @@ Push-Location $worktreeDir
 try {
     git fetch origin 2>$null
     git rebase main
-    Write-Host "[✓] Successfully rebased $Agent onto latest main." -ForegroundColor Green
+    Write-Host "[OK] Successfully rebased $Agent onto latest main." -ForegroundColor Green
 } catch {
     Write-Error "Failed to rebase $Agent. Please resolve any conflicts manually."
 } finally {

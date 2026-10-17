@@ -55,4 +55,4 @@ if ($AntigravityOnly) {
 Start-AgentTerminal -AgentName "Claude Code" -WorktreeDir ".worktrees/claude" -CommandToRun "claude" -Color "Magenta"
 Start-AgentTerminal -AgentName "OpenAI Codex" -WorktreeDir ".worktrees/codex" -CommandToRun "Write-Host 'Ready for Codex CLI / Copilot Agent...'" -Color "Green"
 
-Write-Host "`n[✓] Spawned agent sessions. Antigravity can continue coordinating in the root/IDE." -ForegroundColor Cyan
+Write-Host "`n[OK] Spawned agent sessions. Antigravity can continue coordinating in the root/IDE." -ForegroundColor Cyan

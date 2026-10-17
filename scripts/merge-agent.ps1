@@ -35,7 +35,7 @@ if ($status) {
 # Perform merge with explicit commit
 try {
     git merge $branch --no-ff -m "$Message"
-    Write-Host "[✓] Successfully merged $branch into main!" -ForegroundColor Green
+    Write-Host "[OK] Successfully merged $branch into main!" -ForegroundColor Green
     Write-Host "Updating worktree status on TASK_BOARD.md..." -ForegroundColor DarkGray
 } catch {
     Write-Error "Merge conflict encountered. Please inspect and resolve conflicts manually."

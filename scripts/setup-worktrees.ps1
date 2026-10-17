@@ -44,6 +44,7 @@ foreach ($agent in $agents) {
     $dir = $agent.Dir
     $branch = $agent.Branch
     $name = $agent.Name
+    $port = $agent.Port
 
     Write-Host "`n---> Configuring Worktree for: $name" -ForegroundColor Green
     Write-Host "     Target Directory: $dir"
@@ -58,18 +59,23 @@ foreach ($agent in $agents) {
 
     # Check if worktree directory already exists
     if (Test-Path $dir) {
-        Write-Host "     [✓] Worktree directory already exists." -ForegroundColor Yellow
+        Write-Host "     [OK] Worktree directory already exists." -ForegroundColor Yellow
     } else {
         Write-Host "     Creating git worktree at '$dir'..." -ForegroundColor Cyan
         git worktree add $dir $branch
-        Write-Host "     [✓] Successfully provisioned worktree." -ForegroundColor Green
+        Write-Host "     [OK] Successfully provisioned worktree." -ForegroundColor Green
     }
 
     # Generate a local .env.local with isolated port
     $envPath = Join-Path $dir ".env.local"
     if (-not (Test-Path $envPath)) {
-        "PORT=$($agent.Port)`nAGENT_NAME=$name`nWORKTREE_ROLE=$($name.ToUpper())" | Out-File -FilePath $envPath -Encoding utf8
-        Write-Host "     [✓] Configured local dev port ($($agent.Port)) in $envPath" -ForegroundColor DarkGray
+        $envLines = @(
+            "PORT=$port",
+            "AGENT_NAME=$name",
+            "WORKTREE_ROLE=" + $name.ToUpper()
+        )
+        Set-Content -Path $envPath -Value $envLines -Encoding UTF8
+        Write-Host "     [OK] Configured local dev port ($port) in $envPath" -ForegroundColor DarkGray
     }
 }
 
@@ -80,6 +86,6 @@ git worktree list
 
 Write-Host "`nNext steps to launch agents:" -ForegroundColor Yellow
 Write-Host "  - Antigravity: Open repo root or .worktrees/antigravity in Antigravity"
-Write-Host "  - Claude:      cd .worktrees/claude && claude"
-Write-Host "  - Codex:       cd .worktrees/codex && codex"
+Write-Host "  - Claude:      cd .worktrees/claude; claude"
+Write-Host "  - Codex:       cd .worktrees/codex; codex"
 Write-Host "  - Or run:      powershell -ExecutionPolicy Bypass -File ./scripts/launch-agents.ps1"
